@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+    <script src="https://kit.fontawesome.com/daa1d8f720.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">USHYZ</a>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="#accueil" class="navbar__links" id="btnAccueil"> Accueil </a>
+                </li>
+                <li class="navbar__menu">
+                    <a href="ushyz.html" class="navbar__links"> A propos </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#jeux" class="navbar__links" id="btnJeux"> Projets </a>
+                </li>
+            </ul>
+        </div>
+    </nav> 
+     <div id="accueil" class="hero__section">
+        <div class="hero__wrapper">
+            <div class="column__left">
+                <!-- 01 - Présentation -->
+                <h1>Bienvenue !</h1>
+                <p>Je m'appelle Kyllian Pasquier, je suis actuellement en Terminale et je souhaite travailler dans l'industrie du jeu vidéo.
+                    Cette année, j'ai commencé à explorer les différents aspects de la création d'un jeu vidéo en expérimentant un maximum de domaines,
+                    afin d'apprendre et de m'adapter à la diversité des métiers du secteur. Ce portfolio rassemble les différents projets sur lesquels j'ai travaillé au cours de l'année 2025.
+                </p>
+            </div>
+            <div class="column__right">
+            </div>
+        </div>
+     </div>
+     <!-- 02 - Jeux -->
+      <div id="jeux" class="wrapper__ap">
+        <div class="container__wap">
+            <input type="radio" name="slide" id="c1" checked>
+            <label for="c1" class="card">
+                <div class="row">
+                    <div class="icon">1
+                    </div>
+                    <div class="description">
+                        <h4>Buckshot Roulette</h4>
+                        <p>Buckshot roulette est un platformer 2D inspiré de Jump King avec une mécanique simple qui se veut innovante.</p>
+                    </div>
+                </div>
+                <button class="card-button" onclick="window.location.href='br.html'">En savoir plus</button>
+            </label>
+            <input type="radio" name="slide" id="c2" >
+            <label for="c2" class="card">
+                <div class="row">
+                    <div class="icon">2</div>
+                    <div class="description">
+                        <h4>Unethical Success</h4>
+                        <p>Unethical Success est un jeu 3D aux look rétro avec un ojectif simple mais adictif : Devenir riche.</p>
+                    </div>
+                </div>
+                <button class="card-button" onclick="window.location.href='us.html'">En savoir plus</button>
+            </label>
+            <input type="radio" name="slide" id="c3" >
+            <label for="c3" class="card">
+                <div class="row">
+                    <div class="icon">3</div>
+                    <div class="description">
+                        <h4>Twisted Dream</h4>
+                        <p>Twisted Dream est un jeu d'horreur 2D où vous incarnez un enfant terrifié par sa nouvelle maison.</p>
+                    </div>
+                </div>
+                <button class="card-button" onclick="window.location.href='horror.html'">En savoir plus</button>
+            </label>
+        </div>
+      </div>
+</body>
+<script src="js/app.js">
+</script>
+</html>
