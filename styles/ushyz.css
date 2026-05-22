@@ -27,7 +27,8 @@ body {
 }
 a { color: inherit; text-decoration: none; }
  
-/* ── NAV ── */
+
+/* -- NAV -- */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -54,10 +55,22 @@ nav {
 [data-theme="light"] .icon-sun  { display:none; }
 [data-theme="light"] .icon-moon { display:block; }
  
-/* ── HERO ── */
+
+/* -- HERO -- */
 .hero {
   min-height:100vh; padding:0 clamp(1.5rem,5vw,4rem);
   display:flex; align-items:center; position:relative; overflow:hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20vh; /* Ajuste cette valeur pour un fondu plus ou moins long (ex: 15vh ou 25vh) */
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1; /* Passe au-dessus du shader mais reste sous le texte */
 }
 .hero-bg { position:absolute; inset:0; pointer-events:none; }
 #shader-bg {
@@ -91,6 +104,9 @@ nav {
   animation:fadeUp 0.6s 0.34s ease both;
 }
 .hero-actions { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp 0.6s 0.46s ease both; }
+
+
+/* -- BOUTONS PROJETS MINEURS -- */
 .btn-primary {
   display:inline-flex; align-items:center; gap:8px;
   padding:12px 24px; background:var(--accent); color:#fff;
@@ -110,11 +126,13 @@ nav {
   display:flex; align-items:center; gap:8px;
   font-size:11px; color:var(--ink3); letter-spacing:0.08em; text-transform:uppercase;
   animation:bob 2.2s ease-in-out infinite;
+  z-index: 3; /* Fait en sorte que le hint reste au dessus du shader*/
 }
 @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
  
-/* ── SECTION COMMUNE ── */
+
+/* -- SECTION COMMUNE -- */
 .section { padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem); position: relative; z-index: 5; background: var(--bg); }
 .section-header { display:flex; align-items:center; gap:1rem; margin-bottom:2.5rem; }
 .section-label { font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
@@ -122,7 +140,8 @@ nav {
 .section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(24px,3vw,36px); font-weight:600; letter-spacing:-0.03em; color:var(--ink); margin-bottom:0.5rem; }
 .section-sub { font-size:14px; color:var(--ink2); line-height:1.7; max-width:520px; margin-bottom:2.5rem; }
  
-/* ── ACCORDÉON HORIZONTAL ── */
+
+/* -- ACCORDÉON HORIZONTAL -- */
 .accordion {
   display:flex; height:500px;
   border-radius:14px; overflow:hidden;
@@ -206,7 +225,8 @@ nav {
 }
 .btn-accord:hover { opacity:0.85; transform:translateY(-1px); }
  
-/* ── PROJETS PERSO ── */
+
+/* -- PROJETS PERSO -- */
 .perso-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem; }
 .perso-card {
   background:var(--bg2); border:1px solid var(--border);
@@ -224,7 +244,7 @@ nav {
 .perso-tag { font-size:11px; font-weight:500; padding:3px 9px; border-radius:4px; background:var(--accent-dim); color:var(--accent-light); }
 [data-theme="light"] .perso-tag { background:#EEEDFE; color:#3C3489; }
  
-/* ── BOTTOM HUB (à propos + contact) ── */
+/* -- BOTTOM HUB (à propos + contact) -- */
 .bottom-hub { padding:clamp(4rem,8vw,7rem) clamp(1.5rem,5vw,4rem); background:var(--bg2); border-top:1px solid var(--border); }
 .bottom-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
 .bottom-card {
@@ -245,7 +265,8 @@ nav {
 }
 .bottom-card:hover .bottom-card-link { gap:10px; }
  
-/* ── FOOTER ── */
+
+/* -- FOOTER -- */
 footer {
   padding:2rem clamp(1.5rem,5vw,4rem);
   border-top:1px solid var(--border);
@@ -255,7 +276,8 @@ footer {
 .footer-logo span { color:var(--accent); }
 .footer-copy { font-size:12px; color:var(--ink2); }
  
-/* ── FADE UP ── */
+
+/* -- FADE UP -- */
 .fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease, transform 0.6s ease; }
 .fade-up.visible { opacity:1; transform:translateY(0); }
 .fade-up:nth-child(2){transition-delay:0.1s}
