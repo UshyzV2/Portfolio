@@ -1,0 +1,76 @@
+[
+  {
+    "titre": "Frogly Dash",
+    "annee": 2026,
+    "moteur": "Unity",
+    "genre": "Puzzle",
+    "lieu": "Scolaire",
+    "description": "Reprise d'un Sokoban avec ajout d'une mécanique clé, refonte du système de déplacement et amélioration du game feel.",
+    "image": "img/sokoban.jpg",
+    "lien": "projetScolaire/froglydash.html",
+    "est_phare": true,
+    "type": "jeu"
+  },
+  {
+    "titre": "Portal : Gravity",
+    "annee": 2026,
+    "moteur": "Unreal Engine 5",
+    "genre": "Puzzle Game",
+    "lieu": "Scolaire",
+    "description": "Refonte du jeu Portal avec une mécanique originale autour de la gravité.",
+    "image": "img/portal-gravity.jpg",
+    "lien": "projetScolaire/portalgravity.html",
+    "est_phare": true,
+    "type": "jeu"
+  },
+  {
+    "titre": "Cute Until Death",
+    "annee": 2026,
+    "moteur": "Godot Engine",
+    "genre": "Platformer",
+    "lieu": "Personnel",
+    "description": "Plateformer jouant sur la frustration et la subversion des attentes. Découverte du game design comme outil d'équilibrage.",
+    "image": "img/TD.jpg",
+    "lien": "projetPerso/cuteuntildeath.html",
+    "est_phare": false,
+    "type": "jeu",
+    "customTags": ["Punitif", "Rétro", "2D"]
+  },
+  {
+    "titre": "ApocaLead",
+    "annee": 2025,
+    "moteur": "Tabletop Simulator",
+    "genre": "Gestion / Coopétition",
+    "lieu": "Scolaire",
+    "description": "Jeu de gestion et coopétition post-apocalyptique pour 3 à 5 joueurs. Survivre et accumuler des points de leadership.",
+    "image": "img/US.jpg",
+    "lien": "projetScolaire/apocalead.html",
+    "est_phare": true,
+    "type": "jeu",
+    "customTags": ["Post-Apo", "Coopétition", "Survie"] 
+  },
+  {
+    "titre": "Buckshot Recoil",
+    "annee": 2025,
+    "moteur": "Moteur maison",
+    "genre": "Platformer",
+    "lieu": "Personnel",
+    "description": "Platformer 2D avec une mécanique de recul par tir comme moyen de déplacement principal.",
+    "image": "img/BR.jpg",
+    "lien": "projetPerso/buckshotrecoil.html",
+    "est_phare": false,
+    "type": "jeu"
+  },
+  {
+    "titre": "Art & Pixel Art",
+    "annee": 2025,
+    "moteur": "Aseprite / Blender",
+    "genre": "Art",
+    "lieu": "Personnel",
+    "description": "Différents projets d'art et de design : Pixel Art, Modélisation 3D et explorations visuelles.",
+    "image": "img/art.jpg",
+    "lien": "projetPerso/art.html",
+    "est_phare": false,
+    "type": "art"
+  }
+]

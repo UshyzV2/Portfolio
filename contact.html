@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" data-theme="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ushyz | Contact</title>
+    <link rel="stylesheet" href="styles/ushyz.css">
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <a href="index.html" class="nav-logo">K<span>P</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="projects.html">Projets</a></li>
+            <li><a href="art.html">Art &amp; 3D</a></li>
+            <li><a href="info.html">À propos</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== CONTENU PRINCIPAL ===== -->
+    <main>
+        <section class="section" style="background:var(--bg); padding-top:120px;">
+            <div class="section-header">
+                <span class="section-label">Me joindre</span>
+                <div class="section-line"></div>
+            </div>
+            <h1 class="section-title">Contact</h1>
+            <p class="section-sub">N’hésitez pas à me contacter pour un projet, une collaboration ou simplement discuter de jeux vidéo.</p>
+
+            <div style="max-width:600px; margin-top:2rem; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:2.5rem;">
+                <div style="display:flex; flex-direction:column; gap:1.5rem;">
+                    <div>
+                        <div style="font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:0.25rem;">Email</div>
+                        <a href="mailto:kyllian.pasquier26@gmail.com" style="font-size:18px; color:var(--ink); text-decoration:none; font-weight:500; transition:color 0.2s;">
+                            kyllian.pasquier26@gmail.com
+                        </a>
+                    </div>
+                    <div>
+                        <div style="font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-bottom:0.25rem;">Portfolio</div>
+                        <a href="https://ushyz.netlify.app" target="_blank" style="font-size:18px; color:var(--ink); text-decoration:none; font-weight:500; transition:color 0.2s;">
+                            ushyz.netlify.app
+                        </a>
+                    </div>
+                    <div style="border-top:1px solid var(--border); padding-top:1.5rem; display:flex; gap:1.5rem; flex-wrap:wrap;">
+                        <a href="#" style="color:var(--ink2); text-decoration:none; font-weight:500; transition:color 0.2s;">LinkedIn</a>
+                        <a href="#" style="color:var(--ink2); text-decoration:none; font-weight:500; transition:color 0.2s;">Itch.io</a>
+                        <a href="#" style="color:var(--ink2); text-decoration:none; font-weight:500; transition:color 0.2s;">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-logo">K<span>P</span> · Kyllian Pasquier</div>
+        <div class="footer-copy">E-artsup · Section Game · 2025–2026</div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

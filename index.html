@@ -4,267 +4,123 @@
     <meta charset="UTF-8" data-theme="light">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ushyz | Portfolio Game Designer</title>
-    <link rel="stylesheet" href="styles/ushyz.css" type="text/css">
+    <link rel="stylesheet" href="styles/ushyz.css">
 </head>
 <body>
 
-    <!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">K<span>P</span></a>
-  <ul class="nav-links">
-    <li><a href="#projets">Projets</a></li>
-    <li><a href="ushyz.html">À propos</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
-    <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-    </svg>
-    <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-      <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-    </svg>
-  </button>
-</nav>
- 
-<!-- HERO -->
- 
-<section class="hero">
-  <div class="hero-bg">
-    <canvas id="shader-bg"></canvas>
-  </div>
- 
-  <div class="hero-content">
-    <div class="hero-tag">Game Designer</div>
-    <h1 class="hero-title">Kyllian<br><span class="accent">Pasquier</span></h1>
-    <p class="hero-desc">Étudiant en première année à E-artsup section Game. Je conçois des expériences de jeu centrées sur les mécaniques, les systèmes et le game feel — du jeu de société à Unity en passant par Unreal Engine 5.</p>
-    <div class="hero-actions">
-      <a href="#projets" class="btn-primary">
-        Voir mes projets
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="apropos.html" class="btn-ghost">À propos</a>
-    </div>
-  </div>
- 
-  <div class="scroll-hint">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    Défiler
-  </div>
-</section>
- 
-<!-- PROJETS MAJEURS -->
-
-<section class="section" id="projets" style="background:var(--bg);">
-  <div class="section-header">
-    <span class="section-label">Projets Scolaire</span>
-    <div class="section-line"></div>
-  </div>
-  <h2 class="section-title">First Experience - Année N°1</h2>
-  <p class="section-sub">Trois projets aux approches complémentaires — jeu de société, redesign, création de mécanique et développement.</p>
- 
-  <div class="accordion" id="accordion">
- 
-    <!-- ApocaLead -->
-    <div class="accord-panel active" data-id="apocalead">
-      <div class="accord-bg"></div>
-      <svg class="accord-deco" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="500" cy="80" r="180" fill="none" stroke="#C8B8F4" stroke-width="0.7" opacity="0.12"/>
-        <circle cx="500" cy="80" r="120" fill="none" stroke="#C8B8F4" stroke-width="0.5" opacity="0.09"/>
-        <g fill="#C8B8F4" opacity="0.15">
-          <circle cx="380" cy="30" r="1.8"/><circle cx="400" cy="30" r="1.8"/><circle cx="420" cy="30" r="1.8"/><circle cx="440" cy="30" r="1.8"/>
-          <circle cx="380" cy="50" r="1.8"/><circle cx="400" cy="50" r="1.8"/><circle cx="420" cy="50" r="1.8"/><circle cx="440" cy="50" r="1.8"/>
-          <circle cx="380" cy="70" r="1.8"/><circle cx="400" cy="70" r="1.8"/><circle cx="420" cy="70" r="1.8"/><circle cx="440" cy="70" r="1.8"/>
-        </g>
-        <polygon points="30,460 90,380 150,460" fill="none" stroke="#C8B8F4" stroke-width="0.6" opacity="0.15"/>
-      </svg>
-      <span class="accord-num">01</span>
-      <div class="accord-label-v">ApocaLead</div>
-      <div class="accord-content">
-        <div class="accord-type">Jeu de société · Hybride</div>
-        <h3 class="accord-title">ApocaLead</h3>
-        <p class="accord-desc">Jeu de gestion et coopétition post-apocalyptique pour 3 à 5 joueurs. Survivre collectivement aux raids nocturnes tout en accumulant plus de points de leadership que ses alliés. Une tension permanente entre solidarité et égoïsme. Porté sur Tabletop Simulator.</p>
-        <div class="accord-tags">
-          <span class="accord-tag">Game design</span>
-          <span class="accord-tag">Coopétition</span>
-          <span class="accord-tag">Prototype</span>
-          <span class="accord-tag">Tabletop Simulator</span>
-          <span class="accord-tag">Hybride</span>
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <a href="index.html" class="nav-logo">K<span>P</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active">Accueil</a></li>
+            <li><a href="projects.html">Projets</a></li>
+            <li><a href="art.html">Art &amp; 3D</a></li>
+            <li><a href="info.html">À propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+                </svg>
+            </button>
         </div>
-        <div class="accord-actions">
-          <a href="projetScolaire/apocalead.html" class="btn-accord">
-            Voir le projet
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
- 
-    <!-- Portal -->
-    <div class="accord-panel" data-id="portal">
-      <div class="accord-bg"></div>
-      <svg class="accord-deco" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="500" cy="260" r="160" fill="none" stroke="#5DCAA5" stroke-width="0.7" opacity="0.12"/>
-        <circle cx="500" cy="260" r="100" fill="none" stroke="#5DCAA5" stroke-width="0.5" opacity="0.09"/>
-        <circle cx="500" cy="260" r="48" fill="none" stroke="#5DCAA5" stroke-width="0.4" opacity="0.07"/>
-        <g fill="#5DCAA5" opacity="0.14">
-          <circle cx="60" cy="40" r="1.8"/><circle cx="80" cy="40" r="1.8"/><circle cx="100" cy="40" r="1.8"/>
-          <circle cx="60" cy="60" r="1.8"/><circle cx="80" cy="60" r="1.8"/><circle cx="100" cy="60" r="1.8"/>
-        </g>
-        <rect x="50" y="420" width="40" height="40" fill="none" stroke="#5DCAA5" stroke-width="0.6" opacity="0.14" transform="rotate(20 70 440)"/>
-      </svg>
-      <span class="accord-num">02</span>
-      <div class="accord-label-v">Portal</div>
-      <div class="accord-content">
-        <div class="accord-type">Level design · Unreal Engine 5</div>
-        <h3 class="accord-title">Portal — Redesign</h3>
-        <p class="accord-desc">Reconstruction du niveau d'introduction de Portal depuis zéro en Blueprints sur UE5, puis intégration d'une mécanique de gameplay originale. Un exercice d'analyse du design existant avant toute création propre.</p>
-        <div class="accord-tags">
-          <span class="accord-tag">Unreal Engine 5</span>
-          <span class="accord-tag">Blueprints</span>
-          <span class="accord-tag">Level design</span>
-          <span class="accord-tag">Analyse</span>
-        </div>
-        <div class="accord-actions">
-          <a href="projetScolaire/portalgravity.html" class="btn-accord">
-            Voir le projet
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
- 
-    <!-- Sokoban -->
-    <div class="accord-panel" data-id="sokoban">
-      <div class="accord-bg"></div>
-      <svg class="accord-deco" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="480" cy="420" r="150" fill="none" stroke="#F0C97B" stroke-width="0.7" opacity="0.12"/>
-        <circle cx="480" cy="420" r="90" fill="none" stroke="#F0C97B" stroke-width="0.5" opacity="0.09"/>
-        <g fill="#F0C97B" opacity="0.14">
-          <circle cx="40" cy="460" r="1.8"/><circle cx="60" cy="460" r="1.8"/>
-          <circle cx="40" cy="480" r="1.8"/><circle cx="60" cy="480" r="1.8"/>
-        </g>
-        <polygon points="300,40 340,100 260,100" fill="none" stroke="#F0C97B" stroke-width="0.6" opacity="0.14"/>
-      </svg>
-      <span class="accord-num">03</span>
-      <div class="accord-label-v">Sokoban</div>
-      <div class="accord-content">
-        <div class="accord-type">Développement · Unity · Projet de fin d'année</div>
-        <h3 class="accord-title">Sokoban revisité</h3>
-        <p class="accord-desc">Reprise d'un jeu de type Sokoban avec ajout d'une mécanique clé, refonte du système de déplacement et amélioration du game feel — dont la rotation du personnage selon sa direction. Petit détail, grand impact sur la lisibilité et l'immersion.</p>
-        <div class="accord-tags">
-          <span class="accord-tag">Unity</span>
-          <span class="accord-tag">C#</span>
-          <span class="accord-tag">Game feel</span>
-          <span class="accord-tag">Mécanique originale</span>
-        </div>
-        <div class="accord-actions">
-          <a href="projetScolaire/froglydash.html" class="btn-accord">
-            Voir le projet
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
- 
-  </div>
-</section>
- 
-<!-- PROJETS PERSO -->
+    </nav>
 
-<section class="section" style="background:var(--bg2); border-top:1px solid var(--border);">
-  <div class="section-header">
-    <span class="section-label">Projets personnels</span>
-    <div class="section-line"></div>
-  </div>
-  <h2 class="section-title">En dehors des cours</h2>
-  <p class="section-sub">Projets réalisés de façon autonome pour explorer différentes mécaniques et genres, avant et pendant mon entrée à E-artsup.</p>
- 
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-bg">
+            <canvas id="shader-bg"></canvas>
+        </div>
+        <div class="hero-content">
+            <div class="hero-tag">Game Designer</div>
+            <h1 class="hero-title">Kyllian<br><span class="accent">Pasquier</span></h1>
+            <p class="hero-desc">Étudiant en première année à E-artsup section Game. Je conçois des expériences de jeu centrées sur les mécaniques, les systèmes et le game feel — du jeu de société à Unity en passant par Unreal Engine 5.</p>
+            <div class="hero-actions">
+                <a href="jeux.html" class="btn-primary">
+                    Voir mes projets
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+                <a href="apropos.html" class="btn-ghost">À propos</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            Défiler
+        </div>
+    </section>
 
-  <div class="perso-grid">
-    <a href="projetPerso/cuteuntildeath.html" class="perso-card fade-up">
-      <div class="perso-card-header">
-        <div class="perso-card-title">Cute Until Death</div>
-        <span class="perso-card-year">2026</span>
-      </div>
-      <p class="perso-card-desc">Plateformer jouant sur la frustration et la subversion des attentes des joueurs. Découverte et analyse du game design comme outil d’équilibrage entre frustration, divertissement et challenge.</p>
-      <div class="perso-tags">
-        <span class="perso-tag">Platformer</span>
-        <span class="perso-tag">Godot Engine</span>
-        <span class="perso-tag">Pixel-Art</span>
-        <span class="perso-tag">Frustration</span>
-      </div>
-    </a>
+    <!-- ===== PROJETS PHARES (Accordéon) ===== -->
+    <section class="section" id="projets" style="background:var(--bg);">
+        <div class="section-header">
+            <span class="section-label">Projets phares</span>
+            <div class="section-line"></div>
+        </div>
+        <h2 class="section-title">Mes coups de cœur</h2>
+        <p class="section-sub">Les projets dont je suis le plus fier, sélectionnés pour leur originalité et leur game design.</p>
 
-    <a href="projetPerso/buckshotrecoil.html" class="perso-card fade-up">
-      <div class="perso-card-header">
-        <div class="perso-card-title">Buckshot Recoil</div>
-        <span class="perso-card-year">2025</span>
-      </div>
-      <p class="perso-card-desc">Platformer 2D inspiré de Jump King, avec une mécanique de recul par tir comme moyen de déplacement principal. Explorer le mouvement comme contrainte de design.</p>
-      <div class="perso-tags">
-        <span class="perso-tag">Platformer</span>
-        <span class="perso-tag">Mécanique originale</span>
-      </div>
-    </a>
- 
-    <a href="projetPerso/art.html" class="perso-card fade-up">
-      <div class="perso-card-header">
-        <div class="perso-card-title">Art et Design</div>
-        <span class="perso-card-year">2025-2026</span>
-      </div>
-      <p class="perso-card-desc">Différents projets d'art et de design que j'ai pu réaliser. Entre Pixel Art, Modélisation 3D et Design, j'explore divers styles au travers de sujets divers.</p>
-      <div class="perso-tags">
-        <span class="perso-tag">Aseprite</span>
-        <span class="perso-tag">Blender</span>
-        <span class="perso-tag">Design</span>
-      </div>
-    </a>
-    
-  </div>
-</section>
- 
-<!-- BOTTOM HUB -->
+        <div class="accordion" id="accordion-phare">
+            <!-- Injecté par JavaScript -->
+        </div>
+    </section>
 
-<section class="bottom-hub">
-  <div class="section-header">
-    <span class="section-label">En savoir plus</span>
-    <div class="section-line"></div>
-  </div>
-  <div class="bottom-grid">
- 
-    <a href="apropos.html" class="bottom-card fade-up">
-      <div class="bottom-card-label">Profil</div>
-      <div class="bottom-card-title">À propos de moi</div>
-      <p class="bottom-card-desc">Mon parcours, ma vision du game design, ce qui m'a conduit vers la création de jeux et mes ambitions.</p>
-      <span class="bottom-card-link">
-        Découvrir
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </span>
-    </a>
- 
-    <a href="mailto:kyllian.pasquier26@gmail.com" class="bottom-card fade-up">
-      <div class="bottom-card-label">Contact</div>
-      <div class="bottom-card-title">Me contacter</div>
-      <p class="bottom-card-desc">kyllian.pasquier26@gmail.com<br>ushyz.netlify.app</p>
-      <span class="bottom-card-link">
-        Envoyer un email
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </span>
-    </a>
- 
-  </div>
-</section>
- 
-<!-- FOOTER -->
+    <!-- ===== DERNIERS JEUX (Grille) ===== -->
+    <section class="section" style="background:var(--bg2); border-top:1px solid var(--border);">
+        <div class="section-header">
+            <span class="section-label">Derniers jeux</span>
+            <div class="section-line"></div>
+        </div>
+        <h2 class="section-title">Mes créations récentes</h2>
+        <p class="section-sub">Un aperçu de mes derniers projets. Pour voir l'intégralité, rendez-vous sur la page Jeux.</p>
 
-<footer>
-  <div class="footer-logo">K<span>P</span> · Kyllian Pasquier</div>
-  <div class="footer-copy">E-artsup · Section Game · 2025–2026</div>
-</footer>
-<script src="js/app.js">
-</script>
+        <div class="perso-grid" id="grid-recents">
+            <!-- Injecté par JavaScript -->
+        </div>
+
+        <div style="margin-top:2.5rem; text-align:center;">
+            <a href="projects.html" class="btn-primary">
+                Voir tous mes jeux →
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== BOTTOM HUB (Teasers) ===== -->
+    <section class="bottom-hub">
+        <div class="section-header">
+            <span class="section-label">En savoir plus</span>
+            <div class="section-line"></div>
+        </div>
+        <div class="bottom-grid">
+            <a href="apropos.html" class="bottom-card fade-up">
+                <div class="bottom-card-label">Profil</div>
+                <div class="bottom-card-title">À propos de moi</div>
+                <p class="bottom-card-desc">Mon parcours, ma vision du game design, ce qui m'a conduit vers la création de jeux et mes ambitions.</p>
+                <span class="bottom-card-link">Découvrir →</span>
+            </a>
+            <a href="contact.html" class="bottom-card fade-up">
+                <div class="bottom-card-label">Contact</div>
+                <div class="bottom-card-title">Me contacter</div>
+                <p class="bottom-card-desc">kyllian.pasquier26@gmail.com<br>ushyz.netlify.app</p>
+                <span class="bottom-card-link">Envoyer un email →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-logo">K<span>P</span> · Kyllian Pasquier</div>
+        <div class="footer-copy">E-artsup · Section Game · 2025–2026</div>
+    </footer>
+
+    <script src="js/app.js"></script>
 </body>
-
 </html>
