@@ -670,3 +670,163 @@ footer {
   .accord-label-v{transform:translate(-50%,-50%);bottom:unset;top:50%;}
   .bottom-grid{grid-template-columns:1fr;}
 }
+
+/* ============================================================
+   PAGE PROJETS : RECHERCHE & ILLUMINATION
+   ============================================================ */
+
+/* Conteneur principal (recherche + filtres) */
+.search-filter-wrapper {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 0.75rem 1rem 0rem 1rem; /* Ajustement du padding pour un look plus compact */
+    margin-bottom: 2rem;
+    max-width: 1500px;           /*Largeur Barre de Recherche*/
+    width: 100%;                /*Responsive sur Mobile*/
+    transition: border-color 0.3s ease;
+}
+
+/* Barre de recherche */
+.search-bar-container {
+    margin-bottom: 0.5rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 8px 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(127, 119, 221, 0.12);
+}
+
+.search-bar::placeholder {
+    color: var(--ink3);
+}
+
+/* Filtres - intégrés dans le même bloc */
+.filtres {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+}
+
+.filtre-groupe {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.filtre-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--ink3);
+    letter-spacing: 0.06em;
+    margin-right: 0.2rem;
+}
+
+.filtre-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink2);
+    padding: 4px 14px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+}
+
+.filtre-btn:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent-light);
+    transform: translateY(-1px);
+}
+
+.filtre-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgba(127, 119, 221, 0.3);
+}
+
+/* Compteur dynamique */
+#project-counter {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.1em;
+}
+
+/* Effet d'illumination au survol des cartes */
+.perso-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+.perso-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-light);
+    box-shadow: 0 8px 30px rgba(127, 119, 221, 0.25);
+}
+
+/* Version mode clair : ajustement des couleurs */
+[data-theme="light"] .search-filter-wrapper {
+    background: #ffffff;
+}
+
+[data-theme="light"] .search-bar {
+    background: var(--bg2);
+}
+
+[data-theme="light"] .filtre-btn {
+    background: #f0f0f0;
+}
+
+[data-theme="light"] .filtre-btn.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+[data-theme="light"] .perso-card:hover {
+    box-shadow: 0 8px 30px rgba(127, 119, 221, 0.15);
+}
+
+/* Effet d'illumination au survol des cartes (GLOW) */
+.perso-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+}
+
+.perso-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-light);
+    box-shadow: 0 8px 30px rgba(127, 119, 221, 0.25); /* Halo violet subtil */
+}
+
+/* Version mode clair : halo plus discret mais présent */
+[data-theme="light"] .perso-card:hover {
+    box-shadow: 0 8px 30px rgba(127, 119, 221, 0.15);
+}
+
+/* Compteur dynamique */
+#project-counter {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.1em;
+}

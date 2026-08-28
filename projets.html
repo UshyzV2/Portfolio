@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- ===== NAVIGATION (copiée de l'index) ===== -->
+    <!-- ===== NAVIGATION ===== -->
     <nav>
         <a href="index.html" class="nav-logo">K<span>P</span></a>
         <ul class="nav-links" id="navLinks">
@@ -44,10 +44,22 @@
                 <div class="section-line"></div>
             </div>
             <h1 class="section-title">Tous mes jeux</h1>
-            <p class="section-sub" id="projet-count">Filtrez par année, moteur ou contexte pour explorer mon travail.</p>
 
-            <!-- FILTRES -->
-            <div class="filtres" id="filtres-projets"></div>
+            <!-- 🔥 COMPTEUR DYNAMIQUE -->
+            <p class="section-sub" id="projet-count">
+                <span id="project-counter">0</span> projets trouvés
+            </p>
+
+            <!-- 🔥 BLOC RECHERCHE + FILTRES UNIFIÉ -->
+            <div class="search-filter-wrapper">
+                <!-- Barre de recherche -->
+                <div class="search-bar-container">
+                    <input type="text" id="searchInput" placeholder="Rechercher un jeu (titre, moteur, description...)" class="search-bar">
+                </div>
+                
+                <!-- Filtres (générés par JavaScript) -->
+                <div class="filtres" id="filtres-projets"></div>
+            </div>
 
             <!-- GRILLE -->
             <div class="perso-grid" id="grid-tous-les-projets"></div>

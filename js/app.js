@@ -64,12 +64,15 @@ function chargerProjets() {
                 const recents = tousLesProjets.filter(p => p.type === 'jeu').slice(0, 6);
                 afficherAccordion(phares);
                 afficherJeuxRecents(recents);
-            } else if (page === 'projets.html' || page === 'jeux.html' || page === 'projects.html') {
+            } 
+            else if (page === 'projets.html' || page === 'jeux.html' || page === 'projects.html') {
                 console.log('🎮 Page Projets');
                 const jeux = tousLesProjets.filter(p => p.type === 'jeu');
                 console.log('🎮 Nombre de jeux :', jeux.length);
                 
-                // On affiche les vrais jeux
+                // ============================================================
+                // 1. AFFICHAGE DES CARTES
+                // ============================================================
                 const container = document.getElementById('grid-tous-les-projets');
                 if (container) {
                     container.innerHTML = '';
@@ -99,19 +102,95 @@ function chargerProjets() {
                     });
                     console.log('✅ ' + jeux.length + ' cartes affichées !');
                 }
+
+                // ============================================================
+                // 2. AFFICHAGE DES FILTRES
+                // ============================================================
+                const filtreContainer = document.getElementById('filtres-projets');
+                console.log('🔍 Conteneur des filtres trouvé ?', filtreContainer ? 'OUI' : 'NON');
                 
-                // Filtres
-                genererFiltres(jeux);
-                
-                const countEl = document.getElementById('projet-count');
-                if (countEl) {
-                    countEl.textContent = `${jeux.length} projets · Filtrez par année, moteur ou contexte.`;
+                if (filtreContainer) {
+                    console.log('✅ Conteneur trouvé, génération des filtres...');
+                    
+                    const annees = [...new Set(jeux.map(p => p.annee))].sort((a,b) => b - a);
+                    const moteurs = [...new Set(jeux.map(p => p.moteur))].sort();
+                    const lieux = [...new Set(jeux.map(p => p.lieu))].sort();
+
+                    console.log('📊 Années :', annees);
+                    console.log('📊 Moteurs :', moteurs);
+                    console.log('📊 Lieux :', lieux);
+
+                    let html = `<button class="filtre-btn active" data-filtre="tous">Tous</button>`;
+                    
+                    if (annees.length) {
+                        html += `<div class="filtre-groupe"><span class="filtre-label">Année</span>`;
+                        annees.forEach(a => html += `<button class="filtre-btn" data-filtre="annee-${a}">${a}</button>`);
+                        html += `</div>`;
+                    }
+
+                    if (moteurs.length) {
+                        html += `<div class="filtre-groupe"><span class="filtre-label">Moteur</span>`;
+                        moteurs.forEach(m => html += `<button class="filtre-btn" data-filtre="moteur-${m}">${m}</button>`);
+                        html += `</div>`;
+                    }
+
+                    if (lieux.length) {
+                        html += `<div class="filtre-groupe"><span class="filtre-label">Lieu</span>`;
+                        lieux.forEach(l => html += `<button class="filtre-btn" data-filtre="lieu-${l}">${l}</button>`);
+                        html += `</div>`;
+                    }
+
+                    filtreContainer.innerHTML = html;
+                    console.log('✅ Filtres générés :', filtreContainer.innerHTML);
+
+                    // ============================================================
+                    // 3. GESTION DES CLICS SUR LES FILTRES (SYNCHRONISÉ)
+                    // ============================================================
+                    filtreContainer.querySelectorAll('.filtre-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            filtreContainer.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+                            const filtre = this.dataset.filtre;
+                            console.log('🔍 Filtre sélectionné :', filtre);
+                            // On récupère la valeur de la recherche
+                            const searchInput = document.getElementById('searchInput');
+                            const searchTerm = searchInput ? searchInput.value : '';
+                            // On applique les deux
+                            appliquerRechercheEtFiltres(searchTerm, filtre);
+                        });
+                    });
+                } else {
+                    console.error('❌ Conteneur #filtres-projets INTROUVABLE ! Vérifie ton HTML.');
                 }
-            } else if (page === 'art.html') {
+
+                // ============================================================
+                // 4. GESTION DE LA BARRE DE RECHERCHE (SYNCHRONISÉ)
+                // ============================================================
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.addEventListener('input', function() {
+                        const searchTerm = this.value;
+                        const activeBtn = document.querySelector('#filtres-projets .filtre-btn.active');
+                        const filtreActif = activeBtn ? activeBtn.dataset.filtre : 'tous';
+                        appliquerRechercheEtFiltres(searchTerm, filtreActif);
+                    });
+                }
+
+                // ============================================================
+                // 5. COMPTEUR INITIAL
+                // ============================================================
+                const countEl = document.getElementById('project-counter');
+                if (countEl) {
+                    countEl.textContent = jeux.length;
+                }
+
+            } 
+            else if (page === 'art.html') {
                 console.log('🎨 Page Art');
                 const arts = tousLesProjets.filter(p => p.type === 'art');
                 afficherArt(arts);
-            } else {
+            } 
+            else {
                 console.warn('⚠️ Page non reconnue :', page);
             }
         })
@@ -119,16 +198,88 @@ function chargerProjets() {
 }
 
 // ============================================================
-// 5. ACCORDÉON (Projets phares) - VERSION SANS INLINE STYLES
+// 5. APPLIQUER RECHERCHE + FILTRES (COMBINÉ)
+// ============================================================
+function appliquerRechercheEtFiltres(searchTerm, filtreActif) {
+    const jeux = tousLesProjets.filter(p => p.type === 'jeu');
+    if (!jeux.length) return;
+
+    // 1. Appliquer le filtre (année, moteur, lieu)
+    let resultats = jeux;
+    if (filtreActif && filtreActif !== 'tous') {
+        const [type, valeur] = filtreActif.split('-');
+        if (type === 'annee') resultats = jeux.filter(p => p.annee === parseInt(valeur));
+        else if (type === 'moteur') resultats = jeux.filter(p => p.moteur === valeur);
+        else if (type === 'lieu') resultats = jeux.filter(p => p.lieu === valeur);
+    }
+
+    // 2. Appliquer la recherche (si elle existe)
+    if (searchTerm && searchTerm.trim().length > 0) {
+        const term = searchTerm.toLowerCase().trim();
+        resultats = resultats.filter(p =>
+            p.titre.toLowerCase().includes(term) ||
+            p.description.toLowerCase().includes(term) ||
+            p.moteur.toLowerCase().includes(term) ||
+            (p.genre && p.genre.toLowerCase().includes(term)) ||
+            (p.lieu && p.lieu.toLowerCase().includes(term))
+        );
+    }
+
+    // 3. Mettre à jour le compteur
+    const countEl = document.getElementById('project-counter');
+    if (countEl) {
+        countEl.textContent = resultats.length;
+    }
+
+    // 4. Afficher les cartes
+    const container = document.getElementById('grid-tous-les-projets');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (resultats.length === 0) {
+        container.innerHTML = `<p style="padding:2rem; color:var(--ink2); text-align:center; width:100%;">
+            Aucun jeu ne correspond à votre recherche.
+        </p>`;
+        return;
+    }
+
+    resultats.forEach(projet => {
+        const card = document.createElement('a');
+        card.className = 'perso-card';
+        card.href = projet.lien;
+        if (projet.image) {
+            card.style.backgroundImage = `url('${projet.image}')`;
+        } else {
+            card.style.backgroundColor = 'var(--bg2)';
+        }
+        card.innerHTML = `
+            <div class="perso-card-header">
+                <div class="perso-card-title">${projet.titre}</div>
+                <span class="perso-card-year">${projet.annee}</span>
+            </div>
+            <p class="perso-card-desc">${projet.description}</p>
+            <div class="perso-tags">
+                <span class="perso-tag">${projet.moteur}</span>
+                <span class="perso-tag">${projet.lieu}</span>
+                <span class="perso-tag">${projet.genre || 'Jeu'}</span>
+                ${projet.customTags ? projet.customTags.map(tag => `<span class="perso-tag">${tag}</span>`).join('') : ''}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// ============================================================
+// 6. ACCORDÉON (Projets phares)
 // ============================================================
 
-// Fonction utilitaire : supprime accents, espaces, caractères spéciaux
 function slugify(str) {
     return str
         .toLowerCase()
-        .normalize('NFD')                       // Décompose les accents (é -> e + ́)
-        .replace(/[\u0300-\u036f]/g, '')        // Enlève les accents
-        .replace(/[^a-z0-9]/g, '');             // 🟢 SUPPRIME TOUT CE QUI N'EST PAS LETTRE OU CHIFFRE
+        .replace(/\s/g, '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]/g, '');
 }
 
 function afficherAccordion(projetsPhare) {
@@ -136,13 +287,16 @@ function afficherAccordion(projetsPhare) {
     if (!container) return;
     container.innerHTML = '';
 
+    if (!projetsPhare || projetsPhare.length === 0) {
+        container.innerHTML = '<p style="padding:2rem; color:var(--ink2);">Aucun projet phare à afficher.</p>';
+        return;
+    }
+
     projetsPhare.forEach((projet, index) => {
         const panel = document.createElement('div');
         panel.className = `accord-panel ${index === 0 ? 'active' : ''}`;
-        const id = slugify(projet.titre);
-        panel.dataset.id = id;
+        panel.dataset.id = slugify(projet.titre);
 
-        // AUCUNE couleur en inline, tout est géré par le CSS
         panel.innerHTML = `
             <div class="accord-bg"></div>
             <svg class="accord-deco" viewBox="0 0 600 520" xmlns="http://www.w3.org/2000/svg">
@@ -161,16 +315,13 @@ function afficherAccordion(projetsPhare) {
                     ${projet.customTags ? projet.customTags.map(tag => `<span class="accord-tag">${tag}</span>`).join('') : ''}
                 </div>
                 <div class="accord-actions">
-                    <a href="${projet.lien}" class="btn-accord">
-                        Voir le projet →
-                    </a>
+                    <a href="${projet.lien}" class="btn-accord">Voir le projet →</a>
                 </div>
             </div>
         `;
         container.appendChild(panel);
     });
 
-    // Comportement d'ouverture/fermeture
     const panels = document.querySelectorAll('.accord-panel');
     panels.forEach(p => {
         p.addEventListener('click', function() {
@@ -182,19 +333,23 @@ function afficherAccordion(projetsPhare) {
 }
 
 // ============================================================
-// 6. GRILLE DES DERNIERS JEUX (Accueil) - AVEC IMAGES DE FOND
+// 7. GRILLE DES DERNIERS JEUX (Accueil)
 // ============================================================
 function afficherJeuxRecents(projets) {
     const container = document.getElementById('grid-recents');
     if (!container) return;
     container.innerHTML = '';
 
+    if (!projets || projets.length === 0) {
+        container.innerHTML = '<p style="padding:1rem; color:var(--ink2);">Aucun jeu récent à afficher.</p>';
+        return;
+    }
+
     projets.forEach(projet => {
         const card = document.createElement('a');
         card.className = 'perso-card fade-up';
         card.href = projet.lien;
 
-        // 🖼️ On applique l'image en fond
         if (projet.image) {
             card.style.backgroundImage = `url('${projet.image}')`;
         }
@@ -218,99 +373,17 @@ function afficherJeuxRecents(projets) {
 }
 
 // ============================================================
-// 7. GRILLE COMPLÈTE (Page Projets) - AVEC IMAGES DE FOND
-// ============================================================
-function afficherTousLesJeux(projets) {
-    const container = document.getElementById('grid-tous-les-jeux');
-    if (!container) return;
-    container.innerHTML = '';
-
-    projets.forEach(projet => {
-        const card = document.createElement('a');
-        card.className = 'perso-card';
-        card.href = projet.lien;
-
-        // 🖼️ On applique l'image en fond
-        if (projet.image) {
-            card.style.backgroundImage = `url('${projet.image}')`;
-        }
-
-        card.innerHTML = `
-            <div class="perso-card-header">
-                <div class="perso-card-title">${projet.titre}</div>
-                <span class="perso-card-year">${projet.annee}</span>
-            </div>
-            <p class="perso-card-desc">${projet.description}</p>
-            <div class="perso-tags">
-                <span class="perso-tag">${projet.moteur}</span>
-                <span class="perso-tag">${projet.lieu}</span>
-                <span class="perso-tag">${projet.genre}</span>
-                ${projet.customTags ? projet.customTags.map(tag => `<span class="perso-tag">${tag}</span>`).join('') : ''}
-            </div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-// ============================================================
-// 8. FILTRES (Page Jeux)
-// ============================================================
-function genererFiltres(projets) {
-    const container = document.getElementById('filtres-jeux');
-    if (!container) return;
-
-    const annees = [...new Set(projets.map(p => p.annee))].sort((a,b) => b - a);
-    const moteurs = [...new Set(projets.map(p => p.moteur))].sort();
-    const lieux = [...new Set(projets.map(p => p.lieu))].sort();
-
-    let html = `<button class="filtre-btn active" data-filtre="tous">Tous</button>`;
-    
-    html += `<div class="filtre-groupe"><span class="filtre-label">Année</span>`;
-    annees.forEach(a => html += `<button class="filtre-btn" data-filtre="annee-${a}">${a}</button>`);
-    html += `</div>`;
-
-    html += `<div class="filtre-groupe"><span class="filtre-label">Moteur</span>`;
-    moteurs.forEach(m => html += `<button class="filtre-btn" data-filtre="moteur-${m}">${m}</button>`);
-    html += `</div>`;
-
-    html += `<div class="filtre-groupe"><span class="filtre-label">Lieu</span>`;
-    lieux.forEach(l => html += `<button class="filtre-btn" data-filtre="lieu-${l}">${l}</button>`);
-    html += `</div>`;
-
-    container.innerHTML = html;
-
-    container.querySelectorAll('.filtre-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            container.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            filtrerJeux(this.dataset.filtre);
-        });
-    });
-}
-
-function filtrerJeux(filtre) {
-    if (filtre === 'tous') {
-        afficherTousLesJeux(tousLesProjets.filter(p => p.type === 'jeu'));
-        return;
-    }
-    const [type, valeur] = filtre.split('-');
-    const jeux = tousLesProjets.filter(p => p.type === 'jeu');
-    let resultats = jeux;
-
-    if (type === 'annee') resultats = jeux.filter(p => p.annee === parseInt(valeur));
-    else if (type === 'moteur') resultats = jeux.filter(p => p.moteur === valeur);
-    else if (type === 'lieu') resultats = jeux.filter(p => p.lieu === valeur);
-
-    afficherTousLesJeux(resultats);
-}
-
-// ============================================================
-// 9. ART & 3D (Lightbox)
+// 8. ART & 3D (Lightbox)
 // ============================================================
 function afficherArt(oeuvres) {
     const container = document.getElementById('grid-art');
     if (!container) return;
     container.innerHTML = '';
+
+    if (!oeuvres || oeuvres.length === 0) {
+        container.innerHTML = '<p style="padding:2rem; color:var(--ink2); text-align:center;">Aucune œuvre à afficher.</p>';
+        return;
+    }
 
     oeuvres.forEach(oeuvre => {
         const card = document.createElement('div');
@@ -349,7 +422,7 @@ function ouvrirLightbox(oeuvre) {
 }
 
 // ============================================================
-// 10. WEBGL SHADER (Rendu)
+// 9. WEBGL SHADER (Rendu)
 // ============================================================
 const canvas = document.getElementById('shader-bg');
 if (canvas) {
@@ -526,6 +599,6 @@ if (canvas) {
 }
 
 // ============================================================
-// 11. LANCEMENT
+// 10. LANCEMENT
 // ============================================================
 document.addEventListener('DOMContentLoaded', chargerProjets);
