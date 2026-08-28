@@ -46,7 +46,7 @@ let tousLesProjets = [];
 
 function chargerProjets() {
     console.log('🔍 Chargement des projets...');
-    fetch('data/projets.json')
+    fetch('data/projets.json?' + Date.now())
         .then(res => {
             console.log('✅ Réponse reçue, status :', res.status);
             if (!res.ok) throw new Error('Erreur HTTP: ' + res.status);
