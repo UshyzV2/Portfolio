@@ -46,7 +46,7 @@ let tousLesProjets = [];
 
 function chargerProjets() {
     console.log('🔍 Chargement des projets...');
-    fetch('data/projets.json?' + Date.now())
+    fetch('data/projets.json')
         .then(res => {
             console.log('✅ Réponse reçue, status :', res.status);
             if (!res.ok) throw new Error('Erreur HTTP: ' + res.status);
@@ -58,6 +58,9 @@ function chargerProjets() {
             const page = window.location.pathname.split('/').pop();
             console.log('📄 Page détectée :', page);
 
+            // ============================================================
+            // PAGE ACCUEIL (index.html ou "")
+            // ============================================================
             if (page === 'index.html' || page === '') {
                 console.log('🏠 Page Accueil');
                 const phares = tousLesProjets.filter(p => p.est_phare === true && p.type === 'jeu');
@@ -65,14 +68,15 @@ function chargerProjets() {
                 afficherAccordion(phares);
                 afficherJeuxRecents(recents);
             } 
-            else if (page === 'projets.html' || page === 'jeux.html' || page === 'projects.html') {
+            // ============================================================
+            // PAGE PROJETS (avec ou sans .html)
+            // ============================================================
+            else if (page === 'projets.html' || page === 'projets' || page === 'jeux.html' || page === 'jeux' || page === 'projects.html' || page === 'projects') {
                 console.log('🎮 Page Projets');
                 const jeux = tousLesProjets.filter(p => p.type === 'jeu');
                 console.log('🎮 Nombre de jeux :', jeux.length);
                 
-                // ============================================================
-                // 1. AFFICHAGE DES CARTES
-                // ============================================================
+                // --- AFFICHAGE DES CARTES ---
                 const container = document.getElementById('grid-tous-les-projets');
                 if (container) {
                     container.innerHTML = '';
@@ -103,22 +107,14 @@ function chargerProjets() {
                     console.log('✅ ' + jeux.length + ' cartes affichées !');
                 }
 
-                // ============================================================
-                // 2. AFFICHAGE DES FILTRES
-                // ============================================================
+                // --- AFFICHAGE DES FILTRES ---
                 const filtreContainer = document.getElementById('filtres-projets');
-                console.log('🔍 Conteneur des filtres trouvé ?', filtreContainer ? 'OUI' : 'NON');
-                
                 if (filtreContainer) {
                     console.log('✅ Conteneur trouvé, génération des filtres...');
                     
                     const annees = [...new Set(jeux.map(p => p.annee))].sort((a,b) => b - a);
                     const moteurs = [...new Set(jeux.map(p => p.moteur))].sort();
                     const lieux = [...new Set(jeux.map(p => p.lieu))].sort();
-
-                    console.log('📊 Années :', annees);
-                    console.log('📊 Moteurs :', moteurs);
-                    console.log('📊 Lieux :', lieux);
 
                     let html = `<button class="filtre-btn active" data-filtre="tous">Tous</button>`;
                     
@@ -141,31 +137,21 @@ function chargerProjets() {
                     }
 
                     filtreContainer.innerHTML = html;
-                    console.log('✅ Filtres générés :', filtreContainer.innerHTML);
 
-                    // ============================================================
-                    // 3. GESTION DES CLICS SUR LES FILTRES (SYNCHRONISÉ)
-                    // ============================================================
+                    // Gestion des clics sur les filtres
                     filtreContainer.querySelectorAll('.filtre-btn').forEach(btn => {
                         btn.addEventListener('click', function() {
                             filtreContainer.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
                             this.classList.add('active');
                             const filtre = this.dataset.filtre;
-                            console.log('🔍 Filtre sélectionné :', filtre);
-                            // On récupère la valeur de la recherche
                             const searchInput = document.getElementById('searchInput');
                             const searchTerm = searchInput ? searchInput.value : '';
-                            // On applique les deux
                             appliquerRechercheEtFiltres(searchTerm, filtre);
                         });
                     });
-                } else {
-                    console.error('❌ Conteneur #filtres-projets INTROUVABLE ! Vérifie ton HTML.');
                 }
 
-                // ============================================================
-                // 4. GESTION DE LA BARRE DE RECHERCHE (SYNCHRONISÉ)
-                // ============================================================
+                // --- BARRE DE RECHERCHE ---
                 const searchInput = document.getElementById('searchInput');
                 if (searchInput) {
                     searchInput.addEventListener('input', function() {
@@ -176,16 +162,16 @@ function chargerProjets() {
                     });
                 }
 
-                // ============================================================
-                // 5. COMPTEUR INITIAL
-                // ============================================================
+                // --- COMPTEUR ---
                 const countEl = document.getElementById('project-counter');
                 if (countEl) {
                     countEl.textContent = jeux.length;
                 }
-
             } 
-            else if (page === 'art.html') {
+            // ============================================================
+            // PAGE ART (avec ou sans .html)
+            // ============================================================
+            else if (page === 'art.html' || page === 'art') {
                 console.log('🎨 Page Art');
                 const arts = tousLesProjets.filter(p => p.type === 'art');
                 afficherArt(arts);
@@ -204,7 +190,6 @@ function appliquerRechercheEtFiltres(searchTerm, filtreActif) {
     const jeux = tousLesProjets.filter(p => p.type === 'jeu');
     if (!jeux.length) return;
 
-    // 1. Appliquer le filtre (année, moteur, lieu)
     let resultats = jeux;
     if (filtreActif && filtreActif !== 'tous') {
         const [type, valeur] = filtreActif.split('-');
@@ -213,7 +198,6 @@ function appliquerRechercheEtFiltres(searchTerm, filtreActif) {
         else if (type === 'lieu') resultats = jeux.filter(p => p.lieu === valeur);
     }
 
-    // 2. Appliquer la recherche (si elle existe)
     if (searchTerm && searchTerm.trim().length > 0) {
         const term = searchTerm.toLowerCase().trim();
         resultats = resultats.filter(p =>
@@ -225,13 +209,11 @@ function appliquerRechercheEtFiltres(searchTerm, filtreActif) {
         );
     }
 
-    // 3. Mettre à jour le compteur
     const countEl = document.getElementById('project-counter');
     if (countEl) {
         countEl.textContent = resultats.length;
     }
 
-    // 4. Afficher les cartes
     const container = document.getElementById('grid-tous-les-projets');
     if (!container) return;
     container.innerHTML = '';
@@ -272,7 +254,6 @@ function appliquerRechercheEtFiltres(searchTerm, filtreActif) {
 // ============================================================
 // 6. ACCORDÉON (Projets phares)
 // ============================================================
-
 function slugify(str) {
     return str
         .toLowerCase()
