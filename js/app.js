@@ -45,27 +45,77 @@ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 let tousLesProjets = [];
 
 function chargerProjets() {
+    console.log('🔍 Chargement des projets...');
     fetch('data/projets.json')
-        .then(res => res.json())
+        .then(res => {
+            console.log('✅ Réponse reçue, status :', res.status);
+            if (!res.ok) throw new Error('Erreur HTTP: ' + res.status);
+            return res.json();
+        })
         .then(data => {
+            console.log('✅ JSON chargé :', data);
             tousLesProjets = data;
             const page = window.location.pathname.split('/').pop();
+            console.log('📄 Page détectée :', page);
 
             if (page === 'index.html' || page === '') {
+                console.log('🏠 Page Accueil');
                 const phares = tousLesProjets.filter(p => p.est_phare === true && p.type === 'jeu');
                 const recents = tousLesProjets.filter(p => p.type === 'jeu').slice(0, 6);
                 afficherAccordion(phares);
                 afficherJeuxRecents(recents);
-            } else if (page === 'projects.html') {
+            } else if (page === 'projets.html' || page === 'jeux.html' || page === 'projects.html') {
+                console.log('🎮 Page Projets');
                 const jeux = tousLesProjets.filter(p => p.type === 'jeu');
-                afficherTousLesJeux(jeux);
+                console.log('🎮 Nombre de jeux :', jeux.length);
+                
+                // On affiche les vrais jeux
+                const container = document.getElementById('grid-tous-les-projets');
+                if (container) {
+                    container.innerHTML = '';
+                    jeux.forEach(projet => {
+                        const card = document.createElement('a');
+                        card.className = 'perso-card';
+                        card.href = projet.lien;
+                        if (projet.image) {
+                            card.style.backgroundImage = `url('${projet.image}')`;
+                        } else {
+                            card.style.backgroundColor = 'var(--bg2)';
+                        }
+                        card.innerHTML = `
+                            <div class="perso-card-header">
+                                <div class="perso-card-title">${projet.titre}</div>
+                                <span class="perso-card-year">${projet.annee}</span>
+                            </div>
+                            <p class="perso-card-desc">${projet.description}</p>
+                            <div class="perso-tags">
+                                <span class="perso-tag">${projet.moteur}</span>
+                                <span class="perso-tag">${projet.lieu}</span>
+                                <span class="perso-tag">${projet.genre || 'Jeu'}</span>
+                                ${projet.customTags ? projet.customTags.map(tag => `<span class="perso-tag">${tag}</span>`).join('') : ''}
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                    console.log('✅ ' + jeux.length + ' cartes affichées !');
+                }
+                
+                // Filtres
                 genererFiltres(jeux);
+                
+                const countEl = document.getElementById('projet-count');
+                if (countEl) {
+                    countEl.textContent = `${jeux.length} projets · Filtrez par année, moteur ou contexte.`;
+                }
             } else if (page === 'art.html') {
+                console.log('🎨 Page Art');
                 const arts = tousLesProjets.filter(p => p.type === 'art');
                 afficherArt(arts);
+            } else {
+                console.warn('⚠️ Page non reconnue :', page);
             }
         })
-        .catch(err => console.error('Erreur chargement JSON :', err));
+        .catch(err => console.error('❌ Erreur chargement JSON :', err));
 }
 
 // ============================================================
